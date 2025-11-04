@@ -1,13 +1,13 @@
 CREATE TABLE platform (
     platform_id INT PRIMARY KEY,
     platform_type VARCHAR(30) NOT NULL,
-    os VARCHAR(30) NOT NULL
+    operating_system VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE system_info (
     system_id INT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
-    version VARCHAR(20),
+    system_name VARCHAR(50) NOT NULL,
+    system_version VARCHAR(20),
     platform_id INT,
     FOREIGN KEY (platform_id)
         REFERENCES platform (platform_id)
@@ -15,7 +15,7 @@ CREATE TABLE system_info (
 
 CREATE TABLE users (
     user_id INT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
+    user_name VARCHAR(50) NOT NULL,
     device_type VARCHAR(30)
 );
 
@@ -43,10 +43,14 @@ CREATE TABLE threshold (
 CREATE TABLE notification (
     notification_id INT PRIMARY KEY,
     message_text VARCHAR(255) NOT NULL
-        CHECK (message_text ~ '^[A-Za-zА-Яа-я0-9 ,.!?-]{5,255}$'),
+        CHECK (
+            message_text ~ '^[A-Za-zА-Яа-я0-9 ,.!?-]{5,255}$'
+        ),
     date_sent TIMESTAMP NOT NULL,
     notification_type VARCHAR(20)
-        CHECK (notification_type ~ '^(Critical|Informational|Warning)$'),
+        CHECK (
+            notification_type ~ '^(Critical|Informational|Warning)$'
+        ),
     user_id INT,
     system_id INT,
     FOREIGN KEY (user_id)
@@ -58,7 +62,9 @@ CREATE TABLE notification (
 CREATE TABLE recommendation (
     recommendation_id INT PRIMARY KEY,
     description VARCHAR(255) NOT NULL
-        CHECK (description ~ '^[A-Za-zА-Яа-я0-9 ,.!?-]{5,255}$'),
+        CHECK (
+            description ~ '^[A-Za-zА-Яа-я0-9 ,.!?-]{5,255}$'
+        ),
     action_type VARCHAR(50),
     system_id INT,
     FOREIGN KEY (system_id)
