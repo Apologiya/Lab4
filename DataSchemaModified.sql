@@ -36,8 +36,7 @@ CREATE TABLE threshold (
 
 CREATE TABLE notification (
     notification_id INT PRIMARY KEY,
-    message_text VARCHAR(255) NOT NULL 
-CHECK (message_text ~ '^[A-Za-zА-Яа-я0-9 ,.!?-]{5,255}$'),
+    message_text VARCHAR(255) NOT NULL CHECK (message_text ~ '^[A-Za-zА-Яа-я0-9 ,.!?-]{5,255}$'),
     date_sent TIMESTAMP NOT NULL,
     notification_type VARCHAR(20) CHECK (notification_type ~ '^(Critical|Informational|Warning)$'),
     user_id INT,
