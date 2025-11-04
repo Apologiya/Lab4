@@ -16,4 +16,4 @@ jobs:
         run: pip install sqlfluff
 
       - name: Run SQL Linter
-        run: sqlfluff lint "$GITHUB_WORKSPACE/SoftWareProductDevelopment/2-SoftwareDesign/2.5-DataLinter/DataSchemaModified.sql" --dialect postgres
+        run: sqlfluff lint DataSchemaModified.sql --dialect postgres
